@@ -8,12 +8,12 @@
 
 ## Approach
 
-For every element, calculate its complement:
+For every element, calculate:
 
 `complement = target - current element`
 
 * Check if the complement already exists in the `HashMap`.
-* If it exists → return the stored index and current index.
+* If it exists → return its index and the current index.
 * Otherwise, store the current element and its index.
 
 ## Why HashMap?
@@ -32,3 +32,27 @@ We need to quickly check whether the required complement has already appeared.
 > **"What value do I need to reach the target, and have I seen it before?" → Think HashMap + Complement Lookup.**
 
 **Pattern:** Complement Lookup
+
+## Solution
+
+```java
+import java.util.*;
+
+class Solution {
+    public int[] twoSum(int[] arr, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            int complement = target - arr[i];
+
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+
+            map.put(arr[i], i);
+        }
+
+        return new int[]{-1, -1};
+    }
+}
+```
